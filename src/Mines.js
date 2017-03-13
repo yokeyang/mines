@@ -84,25 +84,36 @@ class Mines extends Component {
       let Midbr = this.refs[refbr].props.id;
       let Midtl = this.refs[reftl].props.id;
       let Midbl = this.refs[refbl].props.id;
-      if(reg.test(Mid)){
-        minesdom[ei][ej] = "mine";
-        this.setState({minesdom:minesdom});
-        alert("失败");
-        return false;
-      }else if(reg.test(Midt)||reg.test(Midr)||reg.test(Midb)||reg.test(Midl)||reg.test(Midbl)||reg.test(Midtl)||reg.test(Midtr)||reg.test(Midbr)){
-        neiber[ei][ej] = 0;
-        neiber[ei][ej] = reg.test(Midt)?neiber[ei][ej]+1:neiber[ei][ej];
-        neiber[ei][ej] = reg.test(Midr)?neiber[ei][ej]+1:neiber[ei][ej];
-        neiber[ei][ej] = reg.test(Midb)?neiber[ei][ej]+1:neiber[ei][ej];
-        neiber[ei][ej] = reg.test(Midl)?neiber[ei][ej]+1:neiber[ei][ej];
-        neiber[ei][ej] = reg.test(Midbr)?neiber[ei][ej]+1:neiber[ei][ej];
-        neiber[ei][ej] = reg.test(Midtr)?neiber[ei][ej]+1:neiber[ei][ej];
-        neiber[ei][ej] = reg.test(Midtl)?neiber[ei][ej]+1:neiber[ei][ej];
-        neiber[ei][ej] = reg.test(Midbl)?neiber[ei][ej]+1:neiber[ei][ej];
-        this.setState({neiber:neiber});
-        return false;
-      }else{
-        neiber[ei][ej] = 0;
+      if(neiber[ei][ej] != "^[1-9]\d*$"){
+        if(reg.test(Mid)){
+          for(var i = 0;i < values;i++){
+            for(var j = 0;j < values;j++){
+              var k = i.toString() + j.toString();
+              if(reg.test(this.refs[k].props.id)){
+                i = parseInt(i);
+                j = parseInt(j);
+                minesdom[i][j] = "mine";
+              }
+            }
+          };
+          this.setState({minesdom:minesdom});
+          alert("失败");
+          return false;
+        }else if(reg.test(Midt)||reg.test(Midr)||reg.test(Midb)||reg.test(Midl)||reg.test(Midbl)||reg.test(Midtl)||reg.test(Midtr)||reg.test(Midbr)){
+          neiber[ei][ej] = 0;
+          neiber[ei][ej] = reg.test(Midt)?neiber[ei][ej]+1:neiber[ei][ej];
+          neiber[ei][ej] = reg.test(Midr)?neiber[ei][ej]+1:neiber[ei][ej];
+          neiber[ei][ej] = reg.test(Midb)?neiber[ei][ej]+1:neiber[ei][ej];
+          neiber[ei][ej] = reg.test(Midl)?neiber[ei][ej]+1:neiber[ei][ej];
+          neiber[ei][ej] = reg.test(Midbr)?neiber[ei][ej]+1:neiber[ei][ej];
+          neiber[ei][ej] = reg.test(Midtr)?neiber[ei][ej]+1:neiber[ei][ej];
+          neiber[ei][ej] = reg.test(Midtl)?neiber[ei][ej]+1:neiber[ei][ej];
+          neiber[ei][ej] = reg.test(Midbl)?neiber[ei][ej]+1:neiber[ei][ej];
+          this.setState({neiber:neiber});
+          return false;
+        }else{
+          neiber[ei][ej] = 0;
+        }
       }
       this.setState({neiber:neiber});
     }
